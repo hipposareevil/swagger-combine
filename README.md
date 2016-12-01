@@ -7,11 +7,11 @@
    * [References](#references)
 
 # Introduction
-It is difficult to combine multiple [swagger](swagger.io) outputs into a single format. This project is designed to help.
+It is difficult to combine multiple [swagger](http://swagger.io) outputs into a single format. This project is designed to help.
 
 For instance, you have multiple REST endpoints defined in swagger that is aggregated through a [gateway-api](http://microservices.io/patterns/apigateway.html). You want to expose the combined REST interfaces as a single swagger definition. You can expose each swagger definition, but that's not how they're ultimately used. 
 
-This project creates a [Docker](docker.com) image combines multiple [swagger](swagger.io) definitions into one. The resulting container can be run on the localhost or in a docker environment (via docker-compose for example).
+This project creates a [Docker](http://docker.com) image combines multiple [swagger](http://swagger.io) definitions into one. The resulting container can be run on the localhost or in a docker environment (via docker-compose for example).
 
 This image will also live on [dockerhub.com/u/hipposareevil/swagger-combine](https://hub.docker.com/u/hipposareevil/swagger-combine).
 
@@ -59,7 +59,7 @@ Then run docker image:
 > docker run -p 8765:8080 swagger-combine 10.1.2.3:8080/foo/swagger.yaml 10.1.2.3:8080/bar/myswagger.yml
 ```
 
-Open browser to [localhost:8765](localhost:8765/) and the combined yaml will be shown in the swagger-ui.
+Open browser to [localhost:8765](http://localhost:8765/) and the combined yaml will be shown in the swagger-ui.
 
 ## Running against docker environment
 Say you are running two micro-services (exposed on port 8080) behind a gateway-api and want to combine both REST endpoints. These are running in docker containers on the network *my_network*. 
@@ -69,7 +69,7 @@ Launch the swagger ui via:
 > docker run -p 8765:8080 --network my_network swagger-combine serviceone:8080/swagger.yaml servicetwo:8080/swagger.yaml
 ```
 
-Open browser to [localhost:8765](localhost:8765/) and the combined yaml will be shown in the swagger-ui.
+Open browser to [localhost:8765](http://localhost:8765/) and the combined yaml will be shown in the swagger-ui.
 
 
 
