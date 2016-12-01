@@ -16,7 +16,7 @@ For instance, you have multiple REST endpoints defined in swagger that is aggreg
 
 This project creates a [Docker](http://docker.com) image combines multiple [swagger](http://swagger.io) definitions into one. The resulting container can be run on the localhost or in a docker environment (via docker-compose for example).
 
-This image will also live on [dockerhub.com/u/hipposareevil/swagger-combine](https://hub.docker.com/u/hipposareevil/swagger-combine).
+This image will also live on [hub.docker.com/r/hipposareevil/swagger-combine/](https://hub.docker.com/r/hipposareevil/swagger-combine/)
 
 # Repos used
 This uses code from the following github repositories:

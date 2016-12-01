@@ -4,7 +4,7 @@ FROM mhart/alpine-node:7.2
 EXPOSE 8080
 
 # packages for swagger-ui
-RUN apk add --update nginx openssl
+RUN apk add --update nginx openssl curl
 
 # setup for this version of nginx
 RUN mkdir -p /run/nginx/
@@ -42,6 +42,7 @@ RUN wget -q https://raw.githubusercontent.com/idlerun/swagger-yaml/master/genera
 RUN wget -q https://raw.githubusercontent.com/idlerun/swagger-yaml/master/package.json
 RUN npm install
 
+COPY waitforit.sh /
 COPY run.sh /
 
 ENTRYPOINT ["/run.sh"]
