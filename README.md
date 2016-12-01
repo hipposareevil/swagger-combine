@@ -17,6 +17,7 @@ This image will also live on [dockerhub.com/u/hipposareevil/swagger-combine](htt
 
 # Repos used
 This uses code from the following github repositories:
+
 Repo | Purpose
 --- | ---
 [swagger-yaml](https://github.com/idlerun/swagger-yaml) | Node.js project that combines yaml together
