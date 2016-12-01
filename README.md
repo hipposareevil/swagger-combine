@@ -1,3 +1,6 @@
+Table of Contents
+=================
+
    * [Introduction](#introduction)
    * [Repos used](#repos-used)
    * [Building image](#building-image)
@@ -71,7 +74,6 @@ Launch the swagger ui via:
 ```
 
 Open browser to [localhost:8765](http://localhost:8765/) and the combined yaml will be shown in the swagger-ui.
-
 
 
 # References
