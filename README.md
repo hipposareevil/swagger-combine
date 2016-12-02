@@ -34,9 +34,16 @@ Clone this repository and then run:
 ```
 
 # Usage
+The program accepts either command line arguments or environment variable COMBINE_URLS (comma separated list)
+
 To run against the swagger petstore:
 ```
-> docker run -p 8080:8080 swagger-combine http://petstore.swagger.io/v2/swagger.json
+> docker run -p 8080:8080 swagger-combine http://petstore.swagger.io/v2/swagger.yaml
+```
+
+Or as environment variable (useful for docker-compose):
+```
+> docker run -e COMBINE_URLS=http://petstore.swagger.io/v2/swagger.yaml,http://other.url/swagger.yaml  -p 8080:8080 swagger-combine
 ```
 
 The commandline will accept multiple URLs (with yaml files):
