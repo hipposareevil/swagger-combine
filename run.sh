@@ -60,6 +60,9 @@ node .
 # 3- copy over to swagger-ui location
 cp target/swagger.yaml $NGINX_ROOT
 
+# 3b- Turn off the validator
+sed -i '54i    validatorUrl : null,' $NGINX_ROOT/index.html
+
 # 4- run nginx
 nginx -g 'daemon off;'
 
