@@ -37,8 +37,8 @@ for i in "${urlsToParse[@]}"; do
     echo ":: $url ::"
     
     # Validate the incoming URL,
-    # wait up to 20 seconds.
-    resultString=$(./waitforit.sh $url 20)
+    # wait up to 60 seconds.
+    resultString=$(./waitforit.sh $url 60)
     result=$?
     if [ $result -ne 0 ]; then
         # unable to connect, bail out

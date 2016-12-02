@@ -34,7 +34,7 @@ Clone this repository and then run:
 ```
 
 # Usage
-The program accepts either command line arguments or environment variable COMBINE_URLS (comma separated list)
+The program accepts either command line arguments or environment variable COMBINE_URLS (comma separated list).
 
 To run against the swagger petstore:
 ```
