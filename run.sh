@@ -4,6 +4,13 @@
 # combine them into one yaml file,
 # then serve that up via swagger-ui.
 #
+# The yamls files will be downloaded into the /src directory,
+# each file will get a new sequential number name, e.g. 1.yaml, 2.yaml, etc.
+# so that same named files don't collide.
+#
+# The merge yaml file will live at /target/swagger.yaml and is copied over
+# to the nginx root directory to be consumed by the swagger-ui.
+#
 # URLs can be passed in on the commandline or
 # as environment variable COMBINE_URLS (comma separated)
 
@@ -29,13 +36,16 @@ fi
 
 
 # 1- grab the incoming URLs and download the (yaml) files
+# current yaml file
 count=0
+# array of downloaded file names
+yaml_src_files=()
+
+# Loop through all urls
 for i in "${urlsToParse[@]}"; do
     url=$i
     let count+=1
 
-    echo ":: $url ::"
-    
     # Validate the incoming URL,
     # wait up to 60 seconds.
     resultString=$(./waitforit.sh $url 60)
@@ -50,19 +60,23 @@ for i in "${urlsToParse[@]}"; do
     fi
 
     # Get url and copy into yaml file in /src
-    wget "$url" -O src/"$count".yaml
+    whereToSave=src/"$count".yaml
+    wget "$url" -O $whereToSave
+    yaml_src_files+=($whereToSave)
 done
 
 
-# 2- run swagger-yaml program (via node) to combine them into a /target directory
-node .
+# 2- run the yaml merge program (via java) to combine them into a /target directory
+/merge-yml-master/bin/merge-yml.sh "${yaml_src_files[@]}" > /target/swagger.yaml
 
 # 3- copy over to swagger-ui location
 cp target/swagger.yaml $NGINX_ROOT
 
-# 3b- Turn off the validator
+# 3b- Turn off the validator from the swagger-ui
 sed -i '54i    validatorUrl : null,' $NGINX_ROOT/index.html
 
 # 4- run nginx
 nginx -g 'daemon off;'
+
+
 

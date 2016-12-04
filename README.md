@@ -23,7 +23,7 @@ This uses code from the following github repositories:
 
 Repo | Purpose
 --- | ---
-[swagger-yaml](https://github.com/idlerun/swagger-yaml) | Node.js project that combines yaml together
+[merge-yml](https://github.com/cobbzilla/merge-yml) | Java project to combine yaml files
 [swagger-ui](https://github.com/swagger-api/swagger-ui) | Swagger-ui the serves the final result
 
 # Building image
@@ -85,6 +85,5 @@ Open browser to [localhost:8765](http://localhost:8765/) and the combined yaml w
 
 # References
 
-* Docker image to combine static yaml files: [docker swagger-yaml](https://hub.docker.com/r/hipposareevil/swagger-yaml/)
-* [swagger-yaml project](https://github.com/idlerun/swagger-yaml)
+* [merge-yml](https://github.com/cobbzilla/merge-yml)
 * [swagger-ui project](https://github.com/swagger-api/swagger-ui)
