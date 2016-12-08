@@ -1,7 +1,7 @@
 Table of Contents
 =================
-
    * [Introduction](#introduction)
+      * [caveats](#caveats)
    * [Repos used](#repos-used)
    * [Building image](#building-image)
    * [Usage](#usage)
@@ -17,6 +17,18 @@ For instance, you have multiple REST endpoints defined in swagger that is aggreg
 This project creates a [Docker](http://docker.com) image combines multiple [swagger](http://swagger.io) definitions into one. The resulting container can be run on the localhost or in a docker environment (via docker-compose for example).
 
 This image will also live on [hub.docker.com/r/hipposareevil/swagger-combine/](https://hub.docker.com/r/hipposareevil/swagger-combine/)
+
+## caveats
+The input swagger files can be either *json* or *yaml*. *json* files are converted via [node](https://www.npmjs.com/package/json2yaml) into yaml.
+
+When merging multiple definitions, when there is a collision of data the last one will win. So it will matter what order you pass files into this process.
+
+In my project I am using swagger definitions from multiple dropwizard services and one spring boot. To make sure the host URL is ok, I pass in a secondary yaml file that override the *host* and *info* entries:
+```
+swagger: '2.0'
+info: {description: Exciting stuff. , title: Super Web Service}
+host: localhost:8080
+```
 
 # Repos used
 This uses code from the following github repositories:
@@ -87,3 +99,4 @@ Open browser to [localhost:8765](http://localhost:8765/) and the combined yaml w
 
 * [merge-yml](https://github.com/cobbzilla/merge-yml)
 * [swagger-ui project](https://github.com/swagger-api/swagger-ui)
+* [json2yaml](https://www.npmjs.com/package/json2yaml)

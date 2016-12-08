@@ -62,6 +62,16 @@ for i in "${urlsToParse[@]}"; do
     # Get url and copy into yaml file in /src
     whereToSave=src/"$count".yaml
     wget "$url" -O $whereToSave
+
+    # check if file is json
+    head=$(head -c 3 $whereToSave)
+    if [[ $head == \{* ]]; then
+        # file is json
+        mv $whereToSave src/"$count".json
+        # convert to yaml now
+        json2yaml src/"$count".json > $whereToSave
+    fi
+
     yaml_src_files+=($whereToSave)
 done
 
