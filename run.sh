@@ -46,17 +46,20 @@ for i in "${urlsToParse[@]}"; do
     url=$i
     let count+=1
 
+    echo ""
+    echo "Checking URL '$url'"
+
     # Validate the incoming URL,
     # wait up to 60 seconds.
     resultString=$(./waitforit.sh $url 60)
     result=$?
+    echo "$resultString"
+
     if [ $result -ne 0 ]; then
-        # unable to connect, bail out
-        echo "Unable to get URL $url:"
-        echo "$resultString"
-        exit 1
-    else
-        echo "$resultString"
+        # unable to connect, skip.
+        echo "Unable to get URL $url, skipping."
+        continue
+#        exit 1
     fi
 
     # Get url and copy into yaml file in /src
@@ -77,13 +80,22 @@ done
 
 
 # 2- run the yaml merge program (via java) to combine them into a /target directory
-/merge-yml-master/bin/merge-yml.sh "${yaml_src_files[@]}" > /target/swagger.yaml
+/merge-yml-master/bin/merge-yml.sh "${yaml_src_files[@]}" > /target/swagger.yaml 2>&1
+
+echo ""
+echo "Done merging yaml files"
 
 # 3- copy over to swagger-ui location
 cp target/swagger.yaml $NGINX_ROOT
 
+echo ""
+echo "Turning off validator from swagger-ui"
+
 # 3b- Turn off the validator from the swagger-ui
 sed -i '54i    validatorUrl : null,' $NGINX_ROOT/index.html
+
+echo ""
+echo "Starting nginx"
 
 # 4- run nginx
 nginx -g 'daemon off;'
