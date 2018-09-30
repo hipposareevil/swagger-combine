@@ -46,7 +46,7 @@ This uses code from the following github repositories:
 Repo | Purpose
 --- | ---
 [merge-yml](https://github.com/cobbzilla/merge-yml) | Java project to combine yaml files
-[swagger-ui](https://github.com/swagger-api/swagger-ui) | Swagger-UI thatserves the final result
+[swagger-ui](https://github.com/swagger-api/swagger-ui) | Swagger-UI that serves the final result
 
 # Building image
 Clone this repository and then run:
