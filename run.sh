@@ -62,28 +62,29 @@ validate_parameters() {
 ########
 download_source_yamls() {
     # 1- grab the incoming URLs and download the (yaml) files
+
     # current yaml file
     count=0
+
     # array of downloaded file names
     yaml_src_files=()
 
     # Loop through all urls
-    for i in "${urls_to_parse[@]}"; do
-        url=$i
+    for current_url in "${urls_to_parse[@]}"; do
         let count+=1
 
         echo ""
-        echo "Checking URL '$url'"
+        echo "Checking URL '$current_url'"
 
         # Validate the incoming URL,
         # wait up to 60 seconds.
-        resultString=$(./waitforit.sh $url 60)
+        resultString=$(./waitforit.sh $current_url 60)
         result=$?
         echo "$resultString"
 
         if [ $result -ne 0 ]; then
             # unable to connect, skip.
-            echo "*** Unable to get URL $url, skipping ***"
+            echo "*** Unable to get URL $current_url, skipping ***"
             continue
             #        exit 1
         fi
@@ -91,7 +92,7 @@ download_source_yamls() {
         # Get url and copy into yaml file in /src
         local where_to_save
         where_to_save=${SOURCE_YAML_DIRECTORY}/"$count".yaml
-        wget "$url" -O $where_to_save
+        wget "$current_url" -O $where_to_save
 
         # check if file is json
         head=$(head -c 3 $where_to_save)
