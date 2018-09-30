@@ -1,5 +1,6 @@
 #!/bin/sh
 
+##############################
 # This script polls the incoming URL for a connection.
 # Upon success this will print a message and exit with 0.
 # Upon failure, it will print error message and exit with 1.
@@ -7,6 +8,7 @@
 # params:
 # 1- url
 # 2- timeout (in seconds)
+##############################
 
 #########
 # process params
@@ -34,7 +36,7 @@ connected=0
 
 while [[ $elapsedTime -lt $timeout  && $connected -eq 0 ]]
 do
-    resultString=$(curl  -s -I -w %{http_code} --connect-timeout $waitTime -sL $url_to_check -o /dev/null)
+    resultString=$(curl -s -w %{http_code} --connect-timeout $waitTime -sL $url_to_check -o /dev/null)
     result=$?
     # verify connection and result
     if [ $result -eq 0 ]; then
