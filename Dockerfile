@@ -62,7 +62,8 @@ RUN apk add --update nginx openssl curl bash
 
 # setup for this version of nginx
 RUN mkdir -p /run/nginx/
-ENV NGINX_ROOT=/var/lib/nginx/html
+ENV NGINX_ROOT=/usr/share/nginx/html
+RUN mkdir -p $NGINX_ROOT
 
 # make directories used by the yaml merging
 RUN mkdir -p /src /target
@@ -71,7 +72,8 @@ RUN mkdir -p /src /target
 ##########################
 # grab the swagger-ui
 # Inspired by https://hub.docker.com/r/schickling/swagger-ui/
-ENV SWAGGER_VERSION=2.2.8
+#ENV SWAGGER_VERSION=2.2.8
+ENV SWAGGER_VERSION=3.0.21
 ENV SWAGGER_UI_FOLDER=swagger-ui-$SWAGGER_VERSION
 
 # In the index.html file, Change the default swagger file to be 'swagger.yaml'

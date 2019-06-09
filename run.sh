@@ -21,7 +21,7 @@
 ########
 initialize_variables() {
     # where nginx HTML file are placed
-    NGINX_ROOT=/var/lib/nginx/html/
+    NGINX_ROOT=/usr/share/nginx/html/
 
     # where the source yaml,yml,json files are placed
     SOURCE_YAML_DIRECTORY=/source_yaml/
@@ -130,7 +130,7 @@ start_nginx() {
     echo "Turning off validator from swagger-ui"
     
     # Turn off the validator from the swagger-ui
-    sed -i '54i    validatorUrl : null,' $NGINX_ROOT/index.html
+    sed -i '79i    validatorUrl : null,' $NGINX_ROOT/index.html
     
     echo ""
     echo "Starting nginx"
